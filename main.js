@@ -17,4 +17,5 @@ db.once("open", () => {
   // You can perform database operations here
 
   // Close the connection when you're done
+  mongoose.connection.close();
 });
