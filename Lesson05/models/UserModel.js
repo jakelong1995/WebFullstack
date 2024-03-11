@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const uniqueRandom = require("unique-random"); // A package to generate unique random numbers
+import mongoose from "mongoose";
+import uniqueRandom from "unique-random";
 const rand = uniqueRandom(1000, 9999);
 
 const userSchema = new mongoose.Schema({
@@ -20,4 +20,4 @@ userSchema.statics.createUser = async function (userName) {
 
 const User = mongoose.model("User", userSchema);
 
-module.exports = User;
+export default User;

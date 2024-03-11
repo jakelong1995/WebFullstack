@@ -1,6 +1,6 @@
-const UserModel = require("./UserModel"); // Import the Model
+import UserModel from "../models/UserModel.js";
 
-exports.registerUser = async (req, res) => {
+const registerUser = async (req, res) => {
   try {
     const { userName } = req.body;
     const newUser = await UserModel.createUser(userName);
@@ -9,3 +9,5 @@ exports.registerUser = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+export default registerUser;

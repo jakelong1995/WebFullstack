@@ -1,11 +1,14 @@
 import "dotenv/config";
 import express from "express";
 import mongoose from "mongoose";
+import router from "./routes/routes.js";
+
 const app = express();
 const PORT = process.env.PORT || 4001;
 const uri = `mongodb+srv://${process.env.MONGODB_DB_NAME}:${process.env.MONGODB_PWD}@cluster0.djglaud.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 
 app.use(express.json());
+app.use("/api", router);
 
 mongoose
   .connect(uri)
@@ -15,3 +18,12 @@ mongoose
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
+// Viết API việc đăng ký user với userName, id sẽ được là một string ngẫu nhiên, không được phép trùng, bắt đầu từ ký tự US (ví dụ: US8823).
+// Viết API cho phép user tạo bài post (thêm bài post, xử lý id tương tự user).
+// Viết API cho phép user chỉnh sửa lại bài post (chỉ user tạo bài viết mới được phép chỉnh sửa).
+// Viết API cho phép user được comment vào bài post
+// Viết API cho phép user chỉnh sửa comment (chỉ user tạo comment mới được sửa)
+// Viết API lấy tất cả comment của một bài post.
+// Viết API lấy tất cả các bài post, 3 comment đầu (dựa theo index) của tất cả user .
+// Viết API lấy một bài post và tất cả comment của bài post đó thông qua postId
