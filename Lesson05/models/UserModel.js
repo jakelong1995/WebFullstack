@@ -1,23 +1,20 @@
 import mongoose from "mongoose";
-import uniqueRandom from "unique-random";
-const rand = uniqueRandom(1000, 9999);
 
+// Define the schema for the User model
 const userSchema = new mongoose.Schema({
-  id: String,
-  userName: String,
+  id: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  userName: {
+    type: String,
+    required: true
+  }
 });
 
-userSchema.statics.createUser = async function (userName) {
-  const existingUser = await this.findOne({ userName });
-  if (existingUser) {
-    throw new Error("Username already exists");
-  }
-  const userId = "US" + rand();
-  const newUser = new this({ id: userId, userName });
-  await newUser.save();
-  return newUser;
-};
 
+// Create and export the User model
 const User = mongoose.model("User", userSchema);
 
 export default User;

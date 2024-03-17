@@ -17,7 +17,6 @@
     "json-server": "^1.0.0-alpha.23",
     "mongodb": "^6.5.0",
     "mongoose": "^8.2.1",
-    "unique-random": "^3.0.0",
     "uuid": "^9.0.1"
   },
   "devDependencies": {
