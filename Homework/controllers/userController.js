@@ -5,19 +5,16 @@ const createUser = async (req, res) => {
      // Parse request body
     const { userName } = req.body;
 
-    // Generate a unique ID for the user
-    const userId = generateUserId();
-
     // Create a new user instance
     const newUser = new User({
-      id: userId,
+      userId: generateUserId(),
       userName
     });
 
     // Save the user to the database
     const savedUser = await newUser.save();
 
-    res.status(201).json({success: true, message: 'User created successfully', user: savedUser});
+    res.status(201).json({success: true, message: 'User created successfully', User: savedUser});
   } catch (error) {
     console.error('Error creating user:', error);
     res.status(500).json({ success: false, message: 'Failed to create user', error: error.message });

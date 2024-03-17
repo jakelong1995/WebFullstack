@@ -7,18 +7,15 @@ const createPost = async (req, res) => {
     const {content,authorId} = req.body;
 
     // Check if the authorId exists in the database
-    const existingUser = await User.findOne({ id: authorId });
+    const existingUser = await User.findOne({ userId: authorId });
 
     if (!existingUser) {
         return res.status(400).json({ success: false, message: 'User with provided authorId does not exist' });
       }
-        
-    // Generate a unique ID for the user
-    const postId = generatePostId();
 
     // Create a new user instance
     const newPost = new Post({
-      id: postId,
+      postId: generatePostId(),
       content,
       authorId
     });
@@ -26,7 +23,7 @@ const createPost = async (req, res) => {
     // Save the user to the database
     const savedPost = await newPost.save();
 
-    res.status(201).json({success: true, message: 'Post created successfully', post: savedPost});
+    res.status(201).json({success: true, message: 'Post created successfully', Post: savedPost});
   } catch (error) {
     console.error('Error creating new post:', error);
     res.status(500).json({ success: false, message: 'Failed to create new post', error: error.message });

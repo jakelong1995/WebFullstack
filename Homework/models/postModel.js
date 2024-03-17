@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 // Define the schema for the Post model
 const userSchema = new mongoose.Schema({
-  id: {
+  postId: {
     type: String,
     required: true,
     unique: true
